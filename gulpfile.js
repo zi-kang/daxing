@@ -23,6 +23,10 @@ gulp.task('copyJs',function(){
        .pipe(concat('main.js') )
        .pipe( gulp.dest('dev/js/') )
 });
+gulp.task('copyLibs',function(){
+    gulp.src('source/libs/*.js')
+        .pipe( gulp.dest('dev/libs/') )
+});
 gulp.task('copyFont',function(){
    gulp.src('source/font/*')
        .pipe( gulp.dest('dev/font/') )
@@ -60,7 +64,7 @@ gulp.task('include', function(){
 
 
 gulp.task('less',function(){
-    gulp.src(['source/less/index.less'])
+    gulp.src(['source/less/common.less'])
         .pipe( less() )
         .pipe(autoprefixer({
             browsers: ['last 20 versions','last 2 Explorer versions','last 3 Safari versions','Firefox >= 20'],
@@ -71,6 +75,7 @@ gulp.task('less',function(){
 gulp.task('watch',function(){
     gulp.watch('source/less/*.less',['less']);
     gulp.watch('source/*.html',['html']);
+    gulp.watch('source/*/*.js',['copyJs']);
     gulp.watch('dev/*.html',['include']);
 });
 gulp.task('localhost',function(){
@@ -107,6 +112,6 @@ gulp.task('publishHtml',function(){
 });
 
 
-gulp.task('dev',['copyJs','copyImg','copyFont','less','html']);
+gulp.task('dev',['copyJs', 'copyLibs','copyImg','copyFont','less','html']);
 gulp.task('publish',['publishCss','publishJs','publishImg','publishFont','publishHtml']);
 gulp.task('default',['include','localhost','watch']);

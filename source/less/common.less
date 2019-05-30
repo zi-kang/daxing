@@ -1,0 +1,127 @@
+@font-face{
+  font-family: 'myfont';
+  src: url('../font/Montserrat-Black-2.otf');
+  src:url('../font/Montserrat-Bold-3.otf') format('otf'),
+  url('../font/Montserrat-ExtraBold-4.otf') format('otf'),
+  url('../font/Montserrat-ExtraLight-5.otf') format('otf'),
+  url('../font/Montserrat-Light-6.otf') format('otf'),
+  url('../font/Montserrat-Medium-7.otf') format('otf'),
+  url('../font/Montserrat-Regular-8.otf') format('otf'),
+  url('../font/Montserrat-SemiBold-9.otf') format('otf'),
+  url('../font/Montserrat-Thin-10.otf') format('otf'),
+  url('../font/MontserratAlternates-Black-11.otf') format('otf'),
+  url('../font/MontserratAlternates-Bold-12.otf') format('otf'),
+  url('../font/MontserratAlternates-ExtraBold-13.otf') format('otf'),
+  url('../font/MontserratAlternates-ExtraLight-14.otf') format('otf'),
+  url('../font/MontserratAlternates-Light-15.otf') format('otf'),
+  url('../font/MontserratAlternates-Medium-16.otf') format('otf'),
+  url('../font/MontserratAlternates-Regular-17.otf') format('otf'),
+  url('../font/MontserratAlternates-SemiBold-18.otf') format('otf'),
+  url('../font/MontserratAlternates-Thin-19.otf') format('otf');
+}
+
+*{
+  margin: 0;
+  padding: 0;
+  font-family: myfont;
+}
+html{
+  width: 100%;
+  height: 100%;
+}
+body{
+  font-size: 14px;
+}
+.dn{
+  display: none;
+}
+.db{
+  display: block;
+}
+.dlb{
+  display: inline-block;
+}
+.pa{
+  position: absolute;
+}
+.pr{
+  position: relative;
+}
+.b-sizing{
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.v-center{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -moz-transform: translate(-50%,-50%);
+  -webkit-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+}
+.p-middle{
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+}
+
+.t-center{
+  text-align: center;
+}
+
+.t-left{
+  text-align: left;
+}
+
+.t-right{
+  text-align: right;
+}
+.ovn{
+  overflow: hidden;
+}
+.vtt{
+  vertical-align: top;
+}
+.vtm{
+  vertical-align: middle;
+}
+
+@media  screen and (max-width: 299px) {
+  html{
+    font-size: 70px;
+  }
+}
+@media  screen and (min-width: 300px) {
+  html{
+    font-size: 80px;
+  }
+}
+@media  screen and (min-width: 350px) {
+  html{
+    font-size: 90px;
+  }
+}
+
+@media  screen and (min-width: 370px) {
+  html{
+    font-size: 100px;
+  }
+}
+
+@media screen and (min-width: 375px) {
+  html{
+    font-size: 26.66666667vw;
+  }
+}
+
+
+
+@import "index";
