@@ -76,6 +76,7 @@ gulp.task('watch',function(){
     gulp.watch('source/less/*.less',['less']);
     gulp.watch('source/*.html',['html']);
     gulp.watch('source/*/*.js',['copyJs']);
+    gulp.watch('source/image/*',['copyImg']);
     gulp.watch('dev/*.html',['include']);
 });
 gulp.task('localhost',function(){
@@ -92,6 +93,11 @@ gulp.task('publishCss',function(){
     gulp.src(['dev/css/*.css'])
         .pipe( cleanCss() )
         .pipe( gulp.dest('release/css/'));
+});
+gulp.task('publishLibs',function(){
+    gulp.src(['dev/libs/*.js'])
+        .pipe( uglify() )
+        .pipe( gulp.dest('release/libs/'));
 });
 gulp.task('publishJs',function(){
     gulp.src(['dev/js/*.js'])
@@ -113,5 +119,5 @@ gulp.task('publishHtml',function(){
 
 
 gulp.task('dev',['copyJs', 'copyLibs','copyImg','copyFont','less','html']);
-gulp.task('publish',['publishCss','publishJs','publishImg','publishFont','publishHtml']);
+gulp.task('publish',['publishCss','publishJs', 'publishLibs', 'publishImg','publishFont','publishHtml']);
 gulp.task('default',['include','localhost','watch']);
