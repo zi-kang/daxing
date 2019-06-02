@@ -27,10 +27,30 @@
     <span class="dlb p-center sound-btn-common" id="openSoundBtn"></span>
     <span class="dn p-center sound-btn-common" id="closeSoundBtn"></span>
 </div>
-<script src="./libs/jqery.js"></script>
+<div id="stageCover" class="dn b-sizing">
+    <span class="db lead-logo"></span>
+    <p class="module-sound-title t-center">Please put your headphone on</p>
+    <div class="module-btn-common run-way b-sizing"><span class="db">RUNWAYS</span></div>
+    <div class="module-btn-common location b-sizing"><span class="db">LOCATION</span></div>
+    <div class="module-btn-common data-story b-sizing"><span class="db">DATA STORY</span></div>
+    <div class="module-btn-common terminal b-sizing"><span class="db">TERMINAL</span></div>
+    <div class="module-btn-common video-1 b-sizing"><span class="db">VIDEO 1</span></div>
+    <div class="module-btn-common inside b-sizing"><span class="db">INSIDE</span></div>
+</div>
+<div id="stage" class="dn"></div>
+<script src="./libs/jquery.js"></script>
+<script type="text/javascript" src="https://cdn.bootcss.com/eruda/1.2.6/eruda.min.js"></script>
+<script type="text/javascript" src="./libs/three.js"></script>
+<script type="text/javascript" src="./libs/inflate.min.js"></script>
+<script type="text/javascript" src="./libs/OrbitControls.js"></script>
+<script type="text/javascript" src="./libs/FBXLoader.js"></script>
+<script type="text/javascript" src="./libs/OBJLoader.js"></script>
+<script type="text/javascript" src="./libs/MTLLoader.js"></script>
+<script type="text/javascript" src="./libs/TGALoader.js"></script>
 <script src="./js/main.js"></script>
 <script>
-    daxing();
+    loadModule();
+    // daxing();
 </script>
 </body>
 </html>
