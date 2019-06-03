@@ -59,6 +59,7 @@ function playVideo() {
 
 function loadModule() {
     playModuleSound();
+    moduleBtnActive();
     $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
@@ -144,4 +145,148 @@ function playModuleSound() {
     setTimeout(function () {
         $('.module-sound-title').addClass('dn');
     }, 3000)
+}
+
+function moduleBtnActive() {
+    var stageCoverMain = $('#stageCoverMain');
+    $('.terminal').on('click', function () {
+        moduleBtnActiveCommon();
+        termanilActive();
+    });
+    $('.connect-about').on('click', function () {
+        aboutPageActive();
+    });
+    $('.location').on('click', function () {
+        playModuleVideoActive();
+    })
+}
+
+function moduleBtnActiveCommon() {
+    $('#stageCoverMain').addClass('dn')
+}
+
+function closeCommonActive() {
+    $('#stageCoverMain').removeClass('dn')
+}
+
+function aboutPageActive() {
+    var aboutPage = $('.stage-cover-about-page');
+    aboutPage.removeClass('dn');
+    $('.go-back').on('click', function () {
+        aboutPage.addClass('dn');
+        closeCommonActive();
+    })
+}
+
+function termanilActive() {
+    var termanilPage = $('.stage-cover-terminal');
+    termanilPage.removeClass('dn');
+    $('.terminal-area-number').text('1.42 million square meters');
+    $('.terminal-close').on('click', function () {
+        termanilPage.addClass('dn');
+        closeCommonActive();
+    })
+}
+
+function playModuleVideoActive() {
+    var moduleVideoPage = $('.module-video-page');
+    moduleVideoPage.removeClass('dn');
+    var moduleVideoEle = document.getElementById('moduleVideo');
+    moduleVideoEle.play();
+    var clientMoveX = 0,
+        totalVideoTime = moduleVideoEle.duration,
+        isEmbed = false;
+    $('#currentVideoTotalTIme').text(getVideoTimeCommon(parseInt(moduleVideoEle.duration)));
+
+    var currentVideoProgressShow = $('#currentVideoProgressShow'),
+        currentVideoTime = $('#currentVideoTime'),
+        oL = 0;
+
+    moduleVideoEle.addEventListener('timeupdate', function (ev) {
+        var timeAbout = (this.currentTime/this.duration)*100,
+        currentVideoNewTime = this.currentTime;
+        currentVideoProgressShow.css('width', timeAbout + '%');
+        currentVideoTime.css('left', timeAbout + '%');
+        oL = getVideoTimeCommon(parseInt(currentVideoNewTime)).split('%')/100*2.9;
+        currentVideoTime.text(getVideoTimeCommon(parseInt(currentVideoNewTime)))
+    });
+
+    var videoPlayBtn = $('.video-play-btn'),
+        timer = null;
+    moduleVideoEle.addEventListener('pause', function () {
+        isEmbed = true;
+        videoPlayBtn.removeClass('is-stop').removeClass('dn').addClass('is-play');
+    });
+
+
+    $('#moduleVideo').on('click', function () {
+        videoPlayBtn.removeClass('dn').removeClass('is-play').removeClass('is-stop').removeClass('dn');
+        if(isEmbed) {
+            videoPlayBtn.addClass('is-play')
+        } else {
+            videoPlayBtn.addClass('is-stop');
+            timerActive();
+        }
+
+    });
+    videoPlayBtn.on('click', function () {
+       if(isEmbed) {
+           isEmbed = false;
+           videoPlayBtn.removeClass('is-play').addClass('is-stop');
+           moduleVideoEle.play();
+           timerActive();
+       } else {
+           isEmbed = true;
+           window.clearTimeout(timer);
+           moduleVideoEle.pause();
+       }
+    });
+
+    function timerActive() {
+        window.clearTimeout(timer);
+        timer = setTimeout(function () {
+            videoPlayBtn.addClass('dn')
+        }, 3000)
+    }
+
+    var div1 = document.querySelector('#currentVideoTime');
+    div1.addEventListener('touchstart', function(e) {
+        var ev = e || window.event;
+        console.log(ev.clientX);
+        document.addEventListener("touchmove", defaultEvent, false);
+    });
+    //触摸中的，位置记录
+    div1.addEventListener('touchmove', function(e) {
+        var ev = e || window.event;
+        var touch = ev.targetTouches[0];
+        if(touch.clientX - clientMoveX > 0 && clientMoveX != 0) {
+            if( moduleVideoEle.currentTime < totalVideoTime) {
+                moduleVideoEle.currentTime = moduleVideoEle.currentTime + moduleVideoEle.currentTime/100;
+                console.log('+');
+            }
+        } else{
+            if( moduleVideoEle.currentTime >= 1) {
+                moduleVideoEle.currentTime  = moduleVideoEle.currentTime - moduleVideoEle.currentTime/100;
+                console.log('-')
+            }
+        }
+        clientMoveX = touch.clientX;
+    });
+    //触摸结束时的处理
+    div1.addEventListener('touchend', function() {
+        document.removeEventListener("touchmove", defaultEvent);
+    });
+
+    function defaultEvent(e) {
+        e.preventDefault();
+    }
+}
+
+
+function getVideoTimeCommon(insetTime) {
+   var totalTimeSecond = insetTime % 60,
+        totalTimeMint = (insetTime - totalTimeSecond) / 60;
+    totalTimeSecond = totalTimeSecond < 10 ? '0' + totalTimeSecond: totalTimeSecond;
+    totalTimeMint = totalTimeMint < 10 ? '0' + totalTimeMint: totalTimeMint;
+    return totalTimeMint + ':' + totalTimeSecond;
 }
