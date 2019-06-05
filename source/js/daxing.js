@@ -60,7 +60,7 @@ function playVideo() {
 function loadModule() {
     playModuleSound();
     moduleBtnActive();
-    // $('.lead-into-page').addClass('dn');
+    $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
 
@@ -172,7 +172,7 @@ function closeCommonActive() {
 function aboutPageActive() {
     var aboutPage = $('.stage-cover-about-page');
     aboutPage.removeClass('dn');
-    $('.go-back').on('click', function () {
+    $('.about-back').on('click', function () {
         aboutPage.addClass('dn');
         closeCommonActive();
     })
@@ -216,6 +216,16 @@ function playModuleVideoActive() {
     moduleVideoEle.addEventListener('pause', function () {
         isEmbed = true;
         videoPlayBtn.removeClass('is-stop').removeClass('dn').addClass('is-play');
+    });
+
+    $('.location-back').on('click', function () {
+        moduleVideoPage.addClass('dn');
+        moduleVideoEle.pause();
+        moduleVideoEle.currentTime = 0;
+        setTimeout(function () {
+            isEmbed = false;
+            videoPlayBtn.removeClass('is-play').addClass('dn').addClass('is-stop');
+        },100)
     });
 
 
