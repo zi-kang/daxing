@@ -60,7 +60,7 @@ function playVideo() {
 function loadModule() {
     playModuleSound();
     moduleBtnActive();
-    $('.lead-into-page').addClass('dn');
+    // $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
 

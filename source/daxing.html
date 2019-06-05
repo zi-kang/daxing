@@ -23,7 +23,13 @@
     </div>
 </div>
 <div class="lead-common-bg dn pa lead-video">
-    <video src="./image/test.mp4" preload id="leadVideo"></video>
+    <video src="./image/test.mp4" id="leadVideo"
+           preload
+           webkit-playsinline
+           playsinline
+           webview.allowsInlineMediaPlayback = YES
+           x5-video-player-type="h5"
+    ></video>
     <span class="dlb p-center sound-btn-common" id="openSoundBtn"></span>
     <span class="dn p-center sound-btn-common" id="closeSoundBtn"></span>
 </div>
@@ -76,7 +82,14 @@
 <div id="stage" class="dn"></div>
 
 <div class="module-video-page pa dn">
-    <video src="./image/test.mp4" preload id="moduleVideo"></video>
+    <video src="./image/test.mp4"
+           id="moduleVideo"
+           preload
+           webkit-playsinline
+           playsinline
+           webview.allowsInlineMediaPlayback = YES
+           x5-video-player-type="h5"
+    ></video>
     <div class="video-control-section p-center">
         <div class="video-current-show-section pa">
             <span id="currentVideoTime" class="dlb pa t-center"></span>
@@ -100,8 +113,8 @@
 <script type="text/javascript" src="./libs/TGALoader.js"></script>
 <script src="./js/main.js"></script>
 <script>
-    loadModule();
-    // daxing();
+    // loadModule();
+    daxing();
 </script>
 </body>
 </html>
