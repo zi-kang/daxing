@@ -174,7 +174,6 @@ function aboutPageActive() {
     aboutPage.removeClass('dn');
     $('.about-back').on('click', function () {
         aboutPage.addClass('dn');
-        closeCommonActive();
     })
 }
 
