@@ -158,7 +158,10 @@ function moduleBtnActive() {
     });
     $('.location').on('click', function () {
         playModuleVideoActive();
-    })
+    });
+    $('.data-story').on('click', function () {
+        dataStoreSHowActive();
+    });
 }
 
 function moduleBtnActiveCommon() {
@@ -298,4 +301,12 @@ function getVideoTimeCommon(insetTime) {
     totalTimeSecond = totalTimeSecond < 10 ? '0' + totalTimeSecond: totalTimeSecond;
     totalTimeMint = totalTimeMint < 10 ? '0' + totalTimeMint: totalTimeMint;
     return totalTimeMint + ':' + totalTimeSecond;
+}
+
+function dataStoreSHowActive() {
+    var moduleDataShowPage = $('#moduleDataShowPage');
+    moduleDataShowPage.removeClass('dn');
+    $('.data-show-back').on('click', function () {
+        moduleDataShowPage.addClass('dn');
+    })
 }
