@@ -303,10 +303,26 @@ function getVideoTimeCommon(insetTime) {
     return totalTimeMint + ':' + totalTimeSecond;
 }
 
+
+var introWordList = {
+  cn: [
+      '',
+      '',
+      ''
+  ],
+  en: [
+      'Intro1 : Beijing Daxing International Airport text text text text',
+      'Intro2 : When both airports\' on-time departure performance reaches 85%',
+      'Intro3 : Maximum air traffic when both airports\' on-time departure performance reaches 85%'
+  ]
+};
+
 function dataStoreSHowActive() {
     var moduleDataShowPage = $('#moduleDataShowPage');
     moduleDataShowPage.removeClass('dn');
     $('.data-show-back').on('click', function () {
         moduleDataShowPage.addClass('dn');
-    })
+    });
+    var wordList = introWordList['en'];
+
 }
