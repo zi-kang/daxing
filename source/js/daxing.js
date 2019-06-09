@@ -332,6 +332,8 @@ function dataStoreSHowActive() {
     });
     var wordList = introWordList['en'],
         introWordEle = $('.data-store-intro-word');
+    dataStoreRoll(moduleDataShowPage, wordList, introWordEle);
+
     introWordEle.text(wordList[0]);
     var dataItem = $('.radar-item'),
         dataItemDesc = $('.show-data-store-desc');
@@ -341,6 +343,33 @@ function dataStoreSHowActive() {
             dataItemActiveDescs($(this), dataItemDesc)
         } else {
             dataItemDesc.text('')
+        }
+    })
+}
+
+var windowHeight = $(window).height(),
+    lastScrollHeight = 0;
+function dataStoreRoll(moduleDataShowPage, wordList, introWordEle) {
+    moduleDataShowPage.scrollTop(0);
+    var dataPage1 = $('.data-store-radar'),
+        dataPage4 = $('.data-store-4');
+    moduleDataShowPage.on('scroll', function (ev) {
+        if(lastScrollHeight < moduleDataShowPage.scrollTop()) {
+            console.log('向下滑动')
+        } else {
+            console.log('向上滑动')
+        }
+        lastScrollHeight =  moduleDataShowPage.scrollTop();
+        if(lastScrollHeight === 0) {
+            dataPage1.css('opacity', 1);
+            introWordEle.text(wordList[0]);
+        } else if(lastScrollHeight >= windowHeight) {
+            dataPage1.css('opacity', 0);
+            introWordEle.text(wordList[1]);
+        } else {
+            var opciaty = (windowHeight - lastScrollHeight)/windowHeight;
+            dataPage1.css('opacity', opciaty*0.6);
+            introWordEle.text(wordList[0]);
         }
     })
 }
