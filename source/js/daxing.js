@@ -333,4 +333,21 @@ function dataStoreSHowActive() {
     var wordList = introWordList['en'],
         introWordEle = $('.data-store-intro-word');
     introWordEle.text(wordList[0]);
+    var dataItem = $('.radar-item'),
+        dataItemDesc = $('.show-data-store-desc');
+    dataItem.on('click', function (e) {
+        dataItem.removeClass('active');
+        if($(this).attr('is-show') == 2) {
+            dataItemActiveDescs($(this), dataItemDesc)
+        } else {
+            dataItemDesc.text('')
+        }
+    })
+}
+
+function dataItemActiveDescs(dataEle, dataItemDesc) {
+    dataEle.addClass('active');
+    dataItemDesc.attr('style', dataEle.attr('style'));
+    var specialItem = dataEle.attr('name') + '<br/><span>' + dataEle.attr('distance') + '</span>' + 'KM';
+    dataItemDesc.html(specialItem);
 }
