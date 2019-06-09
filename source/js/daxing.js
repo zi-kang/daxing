@@ -323,6 +323,7 @@ function dataStoreSHowActive() {
     $('.data-show-back').on('click', function () {
         moduleDataShowPage.addClass('dn');
     });
-    var wordList = introWordList['en'];
-
+    var wordList = introWordList['en'],
+        introWordEle = $('.data-store-intro-word');
+    introWordEle.text(wordList[0]);
 }
