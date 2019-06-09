@@ -18,10 +18,12 @@ function daxing() {
     }, 1);
     //TODO:需要整理文字
     $('#selectEn').on('click', function (e) {
-        playVideo()
+        playVideo();
+        languageTypeShow();
     });
     $('#selectCn').on('click', function (e) {
-        playVideo()
+        playVideo();
+        languageTypeShow();
     });
 }
 
@@ -55,6 +57,11 @@ function playVideo() {
         loadModule()
 
     })
+}
+
+
+function languageTypeShow() {
+    
 }
 
 function loadModule() {
