@@ -423,6 +423,71 @@ var planNumList = [
     }
 ];
 
+var peopleNumList = [
+    {
+        years: 2019.0,
+        cn: '1750旅客',
+        cn1: '29旅客',
+        en: '1750 passengers',
+        en1: '29 passengers'
+    },
+    {
+        years: 2019.,
+        cn: '1750旅客',
+        cn1: '97旅客',
+        en: '1750 passengers',
+        en1: '97 passengers'
+    },
+    {
+        years: 2019.1,
+        cn: '1750旅客',
+        cn1: '137旅客',
+        en: '1750 passengers',
+        en1: '137 passengers'
+    },
+    {
+        years: 2019.1,
+        cn: '1530旅客',
+        cn1: '370旅客',
+        en: '1530 passengers',
+        en1: '370 passengers'
+    },
+    {
+        years: 2020.0,
+        cn: '1375旅客',
+        cn1: '670旅客',
+        en: '1375 passengers',
+        en1: '670 passengers'
+    },
+    {
+        years: 2020.1,
+        cn: '1250旅客',
+        cn1: '810旅客',
+        en: '1250 passengers',
+        en1: '810 passengers'
+    },
+    {
+        years: 2021.0,
+        cn: '1150旅客',
+        cn1: '980旅客',
+        en: '1150 passengers',
+        en1: '980 passengers'
+    },
+    {
+        years: 2021.1,
+        cn: '1350旅客',
+        cn1: '1050旅客',
+        en: '1350 passengers',
+        en1: '1050 passengers'
+    },
+    {
+        years: 2025,
+        cn: '旅客',
+        cn1: '1570旅客',
+        en: ' passengers',
+        en1: '157 passengers'
+    }
+];
 var timer, timer1;
 //向下滑动
 function scrollUpActive() {
@@ -450,7 +515,19 @@ function scrollUpActive() {
         }, 600)
     } else if (2*windowHeight < lastScrollHeight && lastScrollHeight <= 3*windowHeight) {
         var opacity2 = (3*windowHeight - lastScrollHeight)/windowHeight;
-        dataPage3.css('opacity', opacity2)
+        dataPage3.css('opacity', opacity2);
+        var indexNum = 0;
+        var planNum = $('.people-capital-nums'),
+            planNum1 = $('.people-capital-nums1'),
+            yearNum = $('.years-num-list1');
+        clearInterval(timer1);
+        timer1 = setInterval(function () {
+            yearNum.text(peopleNumList[indexNum]['years']);
+            planNum.text(lang == 'en' ? peopleNumList[indexNum]['en'] : peopleNumList[indexNum]['cn']);
+            planNum1.text(lang == 'en' ? peopleNumList[indexNum]['en1'] : peopleNumList[indexNum]['cn1']);
+            indexNum++;
+            if(indexNum == 9) {clearInterval(timer)}
+        }, 600)
     } else {
         dataPage4.css('opacity', 1)
     }
@@ -484,7 +561,19 @@ function scrollDownActive() {
     } else if (2*windowHeight < lastScrollHeight && lastScrollHeight <= 3*windowHeight) {
         //展示第三页
         var opacity2 = (3*windowHeight - lastScrollHeight)/windowHeight;
-        dataPage3.css('opacity', opacity2)
+        dataPage3.css('opacity', opacity2);
+        var indexNum = 8;
+        var planNum = $('.people-capital-nums'),
+            planNum1 = $('.people-capital-nums1'),
+            yearNum = $('.years-num-list1');
+        clearInterval(timer1);
+        timer1 = setInterval(function () {
+            yearNum.text(peopleNumList[indexNum]['years']);
+            planNum.text(lang == 'en' ? peopleNumList[indexNum]['en'] : peopleNumList[indexNum]['cn']);
+            planNum1.text(lang == 'en' ? peopleNumList[indexNum]['en1'] : peopleNumList[indexNum]['cn1']);
+            indexNum--;
+            if(indexNum < 0) {clearInterval(timer1)}
+        }, 600)
     } else {
         //展示第四页
         dataPage4.css('opacity', 1)
