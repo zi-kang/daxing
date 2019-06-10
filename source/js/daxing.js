@@ -173,6 +173,9 @@ function moduleBtnActive() {
     $('.data-story').on('click', function () {
         dataStoreSHowActive();
     });
+    $('#stageCoverPlanShow').on('click', function () {
+        getPlanActive();
+    });
 }
 
 function moduleBtnActiveCommon() {
@@ -585,4 +588,9 @@ function dataItemActiveDescs(dataEle, dataItemDesc) {
     dataItemDesc.attr('style', dataEle.attr('style'));
     var specialItem = dataEle.attr('name') + '<br/><span>' + dataEle.attr('distance') + '</span>' + 'KM';
     dataItemDesc.html(specialItem);
+}
+
+//定机票界面
+function getPlanActive() {
+
 }
