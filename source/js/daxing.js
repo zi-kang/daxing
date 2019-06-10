@@ -65,12 +65,14 @@ function playVideo() {
 
 
 function languageTypeShow() {
-
+    $('.input-name-title').text(lang == 'cn' ? '请输入姓名！' : 'WHAT\'S YOUR NAME ?');
+    $('.input-where-title').text(lang == 'cn' ? '您来自哪里！' : 'WHERE ARE YOU FROM？');
 }
 
 function loadModule() {
     playModuleSound();
     moduleBtnActive();
+    languageTypeShow();
     $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
@@ -592,5 +594,9 @@ function dataItemActiveDescs(dataEle, dataItemDesc) {
 
 //定机票界面
 function getPlanActive() {
-
+    var getPlanPage = $('#getPlanPage');
+    getPlanPage.removeClass('dn');
+    $('.get-plan-back').on('click', function () {
+        getPlanPage.addClass('dn');
+    })
 }
