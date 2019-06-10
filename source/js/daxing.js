@@ -1,3 +1,5 @@
+var lang = 'en';
+
 function daxing() {
     var plan = $('.lead-plan'),
         planMark = $('.plan-mark'),
@@ -19,10 +21,12 @@ function daxing() {
     //TODO:需要整理文字
     $('#selectEn').on('click', function (e) {
         playVideo();
+        lang = 'en';
         languageTypeShow();
     });
     $('#selectCn').on('click', function (e) {
         playVideo();
+        lang = 'cn';
         languageTypeShow();
     });
 }
@@ -61,7 +65,7 @@ function playVideo() {
 
 
 function languageTypeShow() {
-    
+
 }
 
 function loadModule() {
@@ -314,13 +318,13 @@ function getVideoTimeCommon(insetTime) {
 var introWordList = {
   cn: [
       '',
-      '',
-      ''
+      '当两个机场的准时起飞性能达到85%时',
+      '当两个机场的准时起飞性能达到85%时，最大空中交通量。'
   ],
   en: [
       'Intro1 : Beijing Daxing International Airport text text text text',
       'Intro2 : When both airports\' on-time departure performance reaches 85%',
-      'Intro3 : Maximum air traffic when both airports\' on-time departure performance reaches 85%'
+      'Intro3 : Maximum air traffic when both airports\' on-time departure performance reaches 85%.'
   ]
 };
 
@@ -351,27 +355,140 @@ var windowHeight = $(window).height(),
     lastScrollHeight = 0;
 function dataStoreRoll(moduleDataShowPage, wordList, introWordEle) {
     moduleDataShowPage.scrollTop(0);
-    var dataPage1 = $('.data-store-radar'),
-        dataPage4 = $('.data-store-4');
     moduleDataShowPage.on('scroll', function (ev) {
         if(lastScrollHeight < moduleDataShowPage.scrollTop()) {
-            console.log('向下滑动')
+            lastScrollHeight =  moduleDataShowPage.scrollTop();
+            scrollUpActive();
         } else {
-            console.log('向上滑动')
+            lastScrollHeight =  moduleDataShowPage.scrollTop();
+            scrollDownActive();
         }
-        lastScrollHeight =  moduleDataShowPage.scrollTop();
         if(lastScrollHeight === 0) {
-            dataPage1.css('opacity', 1);
-            introWordEle.text(wordList[0]);
-        } else if(lastScrollHeight >= windowHeight) {
-            dataPage1.css('opacity', 0);
-            introWordEle.text(wordList[1]);
+            introWordEle.text(wordList[0]).removeClass('dn');
+        } else if (0 < lastScrollHeight && lastScrollHeight < windowHeight - 10){
+            introWordEle.text(wordList[0]).removeClass('dn');
+        } else if(lastScrollHeight >= windowHeight - 10 && lastScrollHeight < 2*windowHeight - 10) {
+            introWordEle.text(wordList[1]).removeClass('dn');
+        } else if(lastScrollHeight >= 2*windowHeight - 10 && lastScrollHeight < 3*windowHeight - 10)  {
+            introWordEle.text(wordList[2]).removeClass('dn');
         } else {
-            var opciaty = (windowHeight - lastScrollHeight)/windowHeight;
-            dataPage1.css('opacity', opciaty*0.6);
-            introWordEle.text(wordList[0]);
+            introWordEle.text('').addClass('dn');
         }
     })
+}
+
+
+var planNumList = [
+    {
+        years: 2018,
+        cn: '1010航班',
+        cn1: '0航班',
+        en: '1010 flight times',
+        en1: '0 flight times'
+    },
+    {
+        years: 2019,
+        cn: '931航班',
+        cn1: '35航班',
+        en: '931 flight times',
+        en1: '35 flight times'
+    },
+    {
+        years: 2020,
+        cn: '763航班',
+        cn1: '286航班',
+        en: '763 flight times',
+        en1: '286 flight times'
+    },
+    {
+        years: 2021,
+        cn: '662航班',
+        cn1: '451航班',
+        en: '662 flight times',
+        en1: '451 flight times'
+    },
+    {
+        years: 2025,
+        cn: '820航班',
+        cn1: '720航班',
+        en: '820 flight times',
+        en1: '720 flight times'
+    },
+    {
+        years: 2040,
+        cn: '0航班',
+        cn1: '1000航班',
+        en: '0 flight times',
+        en1: '1000 flight times'
+    }
+];
+
+var timer, timer1;
+//向下滑动
+function scrollUpActive() {
+    var dataPage1 = $('.data-store-radar'),
+        dataPage2 = $('.data-store-2-main'),
+        dataPage3 = $('.data-store-3-main'),
+        dataPage4 = $('.data-store-4');
+    if (0 <= lastScrollHeight && lastScrollHeight <= windowHeight) {
+        var opacity = (windowHeight - lastScrollHeight)/windowHeight;
+        dataPage1.css('opacity', opacity)
+    } else if (windowHeight < lastScrollHeight && lastScrollHeight <= 2*windowHeight) {
+        var opacity1 = (2*windowHeight - lastScrollHeight)/windowHeight;
+        dataPage2.css('opacity', opacity1);
+        var indexNum = 0;
+        var planNum = $('.plan-capital-nums'),
+            planNum1 = $('.plan-capital-nums1'),
+            yearNum = $('.years-num-list');
+        clearInterval(timer);
+        timer = setInterval(function () {
+            yearNum.text(planNumList[indexNum]['years']);
+            planNum.text(lang == 'en' ? planNumList[indexNum]['en'] : planNumList[indexNum]['cn']);
+            planNum1.text(lang == 'en' ? planNumList[indexNum]['en1'] : planNumList[indexNum]['cn1']);
+            indexNum++;
+            if(indexNum == 6) {clearInterval(timer)}
+        }, 600)
+    } else if (2*windowHeight < lastScrollHeight && lastScrollHeight <= 3*windowHeight) {
+        var opacity2 = (3*windowHeight - lastScrollHeight)/windowHeight;
+        dataPage3.css('opacity', opacity2)
+    } else {
+        dataPage4.css('opacity', 1)
+    }
+}
+
+//向上滑动
+function scrollDownActive() {
+    var dataPage1 = $('.data-store-radar'),
+        dataPage2 = $('.data-store-2-main'),
+        dataPage3 = $('.data-store-3-main'),
+        dataPage4 = $('.data-store-4');
+    if (0 <= lastScrollHeight && lastScrollHeight <= windowHeight) {
+        var opacity = (windowHeight - lastScrollHeight)/windowHeight;
+        dataPage1.css('opacity', opacity)
+    } else if (windowHeight < lastScrollHeight && lastScrollHeight <= 2*windowHeight) {
+        //展示第二页
+        var opacity1 = (2*windowHeight - lastScrollHeight)/windowHeight;
+        dataPage2.css('opacity', opacity1);
+        var indexNum = 5;
+        var planNum = $('.plan-capital-nums'),
+            planNum1 = $('.plan-capital-nums1'),
+            yearNum = $('.years-num-list');
+        clearInterval(timer);
+        timer = setInterval(function () {
+            yearNum.text(planNumList[indexNum]['years']);
+            planNum.text(lang == 'en' ? planNumList[indexNum]['en'] : planNumList[indexNum]['cn']);
+            planNum1.text(lang == 'en' ? planNumList[indexNum]['en1'] : planNumList[indexNum]['cn1']);
+            indexNum--;
+            if(indexNum < 0) {clearInterval(timer)}
+        }, 600)
+    } else if (2*windowHeight < lastScrollHeight && lastScrollHeight <= 3*windowHeight) {
+        //展示第三页
+        var opacity2 = (3*windowHeight - lastScrollHeight)/windowHeight;
+        dataPage3.css('opacity', opacity2)
+    } else {
+        //展示第四页
+        dataPage4.css('opacity', 1)
+    }
 }
 
 function dataItemActiveDescs(dataEle, dataItemDesc) {
