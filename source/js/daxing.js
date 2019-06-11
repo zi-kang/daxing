@@ -160,8 +160,20 @@ var planCapitalList = {
     ]
 };
 function languageTypeShow() {
+    $('.connect-about').text(lang == 'cn' ? '关于' : 'ABOUT');
     $('.input-name-title').text(lang == 'cn' ? '请输入姓名！' : 'WHAT\'S YOUR NAME ?');
     $('.input-where-title').text(lang == 'cn' ? '您来自哪里！' : 'WHERE ARE YOU FROM？');
+    $('.module-sound-title').text(lang == 'cn' ? '请戴上您的耳机' : 'Please put your headphone on');
+    $('.run-way').find('span').text(lang == 'cn' ? '跑道' : 'RUNWAYS');
+    $('.location').find('span').text(lang == 'cn' ? '地理方位' : 'LOCATION');
+    $('.data-story').find('span').text(lang == 'cn' ? '新闻数据' : 'DATA STORY');
+    $('.terminal').find('span').text(lang == 'cn' ? '航站楼' : 'TERMINAL');
+    $('.video-1').find('span').text(lang == 'cn' ? '视频' : 'VIDEO 1');
+    $('.inside').find('span').text(lang == 'cn' ? '全景图' : 'INSIDE');
+    $('.get-plan-tap-btn').text(lang == 'cn' ? '点击后生成机票' : 'TAP TO CREATE YOUR FLIGHT TICKET');
+    $('.terminal-title1').text(lang == 'cn' ? '航站楼' : 'TERMINAL');
+    $('.terminal-area-title').text(lang == 'cn' ? '航站楼面积：' : 'Terminal complex area:');
+    $('.terminal-close').text(lang == 'cn' ? '关闭' : 'close');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
@@ -172,8 +184,8 @@ function languageTypeShow() {
 function loadModule() {
     playModuleSound();
     moduleBtnActive();
-    languageTypeShow();
-    $('.lead-into-page').addClass('dn');
+    // languageTypeShow();
+    // $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
 
@@ -299,7 +311,7 @@ function aboutPageActive() {
 function termanilActive() {
     var termanilPage = $('.stage-cover-terminal');
     termanilPage.removeClass('dn');
-    $('.terminal-area-number').text('1.42 million square meters');
+    $('.terminal-area-number').text(lang == 'cn' ? '142万平方米' :'1.42 million square meters');
     $('.terminal-close').on('click', function () {
         termanilPage.addClass('dn');
         closeCommonActive();
