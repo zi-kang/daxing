@@ -174,6 +174,15 @@ function languageTypeShow() {
     $('.terminal-title1').text(lang == 'cn' ? '航站楼' : 'TERMINAL');
     $('.terminal-area-title').text(lang == 'cn' ? '航站楼面积：' : 'Terminal complex area:');
     $('.terminal-close').text(lang == 'cn' ? '关闭' : 'close');
+    $('.next-words').text(lang == 'cn' ? '下一步' : 'NEXT');
+    $('#nameInputEle').attr('placeholder', lang == 'cn' ? '姓名' : 'NAME');
+    $('.people-nums').text(lang == 'cn' ? ' = 120,000 旅客' : ' = 120 thousand person');
+    $('.plan-nums').text(lang == 'cn' ? ' = 15 架次' : ' = 15 planes');
+    $('.plan-names').text(lang == 'cn' ? '首都机场' : 'Capital  Airport');
+    $('.people-num-type').text(lang == 'cn' ? '/天' : '/ day');
+    $('.plan-num-type').text(lang == 'cn' ? '/天' : '/ day');
+    $('.plan-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
+    $('.people-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
