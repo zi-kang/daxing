@@ -63,10 +63,110 @@ function playVideo() {
     })
 }
 
-
+var planCapitalList = {
+    en: [
+        {
+            city: 'Capital',
+            cityName: 'Beijing',
+            capital: 'Capital'
+        },
+        {
+            city: 'Pudong',
+            cityName: 'Shanghai',
+            capital: 'Pudong'
+        },
+        {
+            city: 'Hongqiao',
+            cityName: 'Shanghai',
+            capital: 'Hongqiao'
+        },
+        {
+            city: 'Haneda',
+            cityName: 'Tokyo',
+            capital: 'Haneda'
+        },
+        {
+            city: 'Narita',
+            cityName: 'Tokyo',
+            capital: 'Narita'
+        },
+        {
+            city: 'JFK',
+            cityName: 'New York',
+            capital: 'JFK'
+        },
+        {
+            city: 'Newark',
+            cityName: 'New York',
+            capital: 'Newark'
+        },
+        {
+            city: 'Heathrow',
+            cityName: 'London',
+            capital: 'Heathrow'
+        },
+        {
+            city: 'Gatwick',
+            cityName: 'London',
+            capital: 'Gatwick'
+        }
+    ],
+    cn: [
+        {
+            city: 'Capital',
+            cityName: '北京',
+            capital: '首都机场'
+        },
+        {
+            city: 'Pudong',
+            cityName: '上海',
+            capital: '浦东机场'
+        },
+        {
+            city: 'Hongqiao',
+            cityName: '上海',
+            capital: '虹桥机场'
+        },
+        {
+            city: 'Haneda',
+            cityName: '东京',
+            capital: '羽田机场'
+        },
+        {
+            city: 'Narita',
+            cityName: '东京',
+            capital: '成田机场'
+        },
+        {
+            city: 'JFK',
+            cityName: '纽约',
+            capital: '肯尼迪机场'
+        },
+        {
+            city: 'Newark',
+            cityName: '纽约',
+            capital: '纽瓦克机场'
+        },
+        {
+            city: 'Heathrow',
+            cityName: '伦敦',
+            capital: '希思罗机场'
+        },
+        {
+            city: 'Gatwick',
+            cityName: '伦敦',
+            capital: '盖特威克机场'
+        }
+    ]
+};
 function languageTypeShow() {
     $('.input-name-title').text(lang == 'cn' ? '请输入姓名！' : 'WHAT\'S YOUR NAME ?');
     $('.input-where-title').text(lang == 'cn' ? '您来自哪里！' : 'WHERE ARE YOU FROM？');
+    var currentPlanCapitalList = planCapitalList[lang];
+    var selectCityEle = $('#selectCityEle');
+    for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
+        selectCityEle.append('<option value= "'+ currentPlanCapitalList[i]['city'] +'">' + currentPlanCapitalList[i]['cityName'] + currentPlanCapitalList[i]['capital'] +'</option>')
+    }
 }
 
 function loadModule() {
@@ -598,5 +698,34 @@ function getPlanActive() {
     getPlanPage.removeClass('dn');
     $('.get-plan-back').on('click', function () {
         getPlanPage.addClass('dn');
-    })
+    });
+    $('.next-btn').on('click', function () {
+        checkoutPlanInput(getPlanPage);
+    });
+}
+
+var getPlanName = '',
+    getPlanCity = '',
+    getPlanCapital = '';
+function checkoutPlanInput(getPlanPage) {
+    var nameValue = $('#nameInputEle').val().trim(),
+        cityValue = $('#selectCityEle').val();
+    var showPlanPage = $('#showPlanPage');
+    var currentPlanCapitalList = planCapitalList[lang];
+    if(!nameValue) {
+        alert(lang == 'cn' ? '请输入姓名': 'Please input your name');
+        return false;
+    }
+
+    getPlanName = nameValue;
+    for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
+        if(cityValue == currentPlanCapitalList[i]['city']) {
+            getPlanCity = currentPlanCapitalList[i]['cityName'];
+            getPlanCapital = currentPlanCapitalList[i]['capital'];
+        }
+    }
+
+    console.log(getPlanName + '+' + getPlanCity + '+' + getPlanCapital)
+    getPlanPage.addClass('dn');
+    showPlanPage.removeClass('dn');
 }
