@@ -184,6 +184,7 @@ function languageTypeShow() {
     $('.plan-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
     $('.people-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
     $('.show-current-plan-note').text(lang == 'cn' ? '和朋友分享!' : 'SHARE WITH YOUR FRIENDS !');
+    $('#showCurrentPlanMain').addClass(lang == 'cn' ? 'plan-bg-cn' : 'plan-bg');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
