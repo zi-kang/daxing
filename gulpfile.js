@@ -10,6 +10,7 @@ var gulp = require('gulp'),
     fs = require('fs'),
     replace = require('gulp-replace'),
     concat = require('gulp-concat'),
+    babel = require('gulp-babel'),
     uglify = require('gulp-uglify');
 
 //开发
@@ -96,11 +97,13 @@ gulp.task('publishCss',function(){
 });
 gulp.task('publishLibs',function(){
     gulp.src(['dev/libs/*.js'])
+        .pipe( babel() )
         .pipe( uglify() )
         .pipe( gulp.dest('release/libs/'));
 });
 gulp.task('publishJs',function(){
     gulp.src(['dev/js/*.js'])
+        .pipe( babel() )
         .pipe( uglify() )
         .pipe( gulp.dest('release/js/'));
 });
