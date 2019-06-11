@@ -783,7 +783,7 @@ function getCurrentPlan() {
         });
     });
     $('.show-plan-back').on('click', function () {
-        getPlanPage.addClass('dn');
+        showPlanPage.addClass('dn');
     })
 
 }
