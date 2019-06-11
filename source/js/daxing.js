@@ -168,8 +168,8 @@ function languageTypeShow() {
     $('.location').find('span').text(lang == 'cn' ? '地理方位' : 'LOCATION');
     $('.data-story').find('span').text(lang == 'cn' ? '新闻数据' : 'DATA STORY');
     $('.terminal').find('span').text(lang == 'cn' ? '航站楼' : 'TERMINAL');
-    $('.video-1').find('span').text(lang == 'cn' ? '视频' : 'VIDEO 1');
-    $('.inside').find('span').text(lang == 'cn' ? '全景图' : 'INSIDE');
+    $('.video-1').find('span').text(lang == 'cn' ? '人物' : 'People');
+    $('.inside').find('span').text(lang == 'cn' ? '360' : '360');
     $('.get-plan-tap-btn').text(lang == 'cn' ? '点击后生成机票' : 'TAP TO CREATE YOUR FLIGHT TICKET');
     $('.terminal-title1').text(lang == 'cn' ? '航站楼' : 'TERMINAL');
     $('.terminal-area-title').text(lang == 'cn' ? '航站楼面积：' : 'Terminal complex area:');
@@ -177,12 +177,13 @@ function languageTypeShow() {
     $('.next-words').text(lang == 'cn' ? '下一步' : 'NEXT');
     $('#nameInputEle').attr('placeholder', lang == 'cn' ? '姓名' : 'NAME');
     $('.people-nums').text(lang == 'cn' ? ' = 120,000 旅客' : ' = 120 thousand person');
-    $('.plan-nums').text(lang == 'cn' ? ' = 15 架次' : ' = 15 planes');
+    $('.plan-nums').text(lang == 'cn' ? ' = 10 架' : ' = 10 planes');
     $('.plan-names').text(lang == 'cn' ? '首都机场' : 'Capital  Airport');
     $('.people-num-type').text(lang == 'cn' ? '/天' : '/ day');
     $('.plan-num-type').text(lang == 'cn' ? '/天' : '/ day');
     $('.plan-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
     $('.people-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
+    $('.show-current-plan-note').text(lang == 'cn' ? '和朋友分享!' : 'SHARE WITH YOUR FRIENDS !');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
@@ -717,6 +718,7 @@ function dataItemActiveDescs(dataEle, dataItemDesc) {
 function getPlanActive() {
     var getPlanPage = $('#getPlanPage');
     getPlanPage.removeClass('dn');
+    $('#nameInputEle').val('');
     $('.get-plan-back').on('click', function () {
         getPlanPage.addClass('dn');
     });
@@ -731,7 +733,7 @@ var getPlanName = '',
 function checkoutPlanInput(getPlanPage) {
     var nameValue = $('#nameInputEle').val().trim(),
         cityValue = $('#selectCityEle').val();
-    var showPlanPage = $('#showPlanPage');
+
     var currentPlanCapitalList = planCapitalList[lang];
     if(!nameValue) {
         alert(lang == 'cn' ? '请输入姓名': 'Please input your name');
@@ -745,8 +747,52 @@ function checkoutPlanInput(getPlanPage) {
             getPlanCapital = currentPlanCapitalList[i]['capital'];
         }
     }
-
-    console.log(getPlanName + '+' + getPlanCity + '+' + getPlanCapital)
     getPlanPage.addClass('dn');
+    getCurrentPlan();
+}
+
+//显示机票
+var monthList = {
+    cn: ['一月','二月','三月','四月','五月','六月','七月','八月','九月','十月','十一月', '十二月'],
+    en: ['JANUARY','FEBRUARY','MARCH','APRIL','MAY','JUNE','JULY','AUGUST','SEPTEMBER','OCTOBER','NOVEMBER', 'DECEMBER']
+};
+
+function getCurrentTime() {
+    var date=new Date();
+    //年
+    var year=date.getFullYear();
+    //月
+    var month= monthList[lang][date.getMonth()];
+    //日
+    var day=date.getDate() < 10 ? '0' + date.getDate() : date.getDate();
+    return '' + month + ' ' + day + ' ' + year
+}
+
+function getCurrentPlan() {
+    var showPlanPage = $('#showPlanPage');
     showPlanPage.removeClass('dn');
+    $('.user-name-show').text(getPlanName);
+    $('.user-plan-city').text(getPlanCity);
+    $('.user-plan-name').text(getPlanCapital);
+    $('.user-plan-time').text(getCurrentTime());
+    $('.download-plan-btn').on('click', function () {
+        html2canvas(document.getElementById('showCurrentPlanMain')).then(function(canvas) {
+            document.body.appendChild(canvas);
+            var img = canvas.toDataURL();
+            saveFile(img, 'daxing.png');
+        });
+    });
+    $('.show-plan-back').on('click', function () {
+        getPlanPage.addClass('dn');
+    })
+
+}
+
+function saveFile(data, filename) {
+    const save_link = document.createElementNS('http://www.w3.org/1999/xhtml', 'a');
+    save_link.href = data;
+    save_link.download = filename;
+    const event = document.createEvent('MouseEvents');
+    event.initMouseEvent('click', true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    save_link.dispatchEvent(event);
 }
