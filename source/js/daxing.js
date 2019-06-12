@@ -21,11 +21,13 @@ function daxing() {
     //TODO:需要整理文字
     $('#selectEn').on('click', function (e) {
         playVideo();
+        // loadModule();
         lang = 'en';
         languageTypeShow();
     });
     $('#selectCn').on('click', function (e) {
         playVideo();
+        // loadModule();
         lang = 'cn';
         languageTypeShow();
     });
@@ -37,6 +39,9 @@ function playVideo() {
     videoLoader.removeClass('dn');
     var myVideo = document.getElementById('leadVideo');
     myVideo.play();
+    var audioEle = document.getElementById('moduleSound');
+    audioEle.play();
+    audioEle.pause();
     setTimeout(function () {
         myVideo.muted = true;
     }, 12000);
@@ -186,6 +191,7 @@ function languageTypeShow() {
     $('.show-current-plan-note').text(lang == 'cn' ? '和朋友分享!' : 'SHARE WITH YOUR FRIENDS !');
     $('#showCurrentPlanMain').addClass(lang == 'cn' ? 'plan-bg-cn' : 'plan-bg');
     $('.data-store-4-main').text(lang == 'cn' ? '获取更多信息请在电脑端浏览' : 'For more information please visit on PC');
+    $('.skip-sound-btn').text(lang == 'cn' ? '跳过' : 'Skip');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
@@ -196,10 +202,13 @@ function languageTypeShow() {
 function loadModule() {
     playModuleSound();
     moduleBtnActive();
-    // languageTypeShow();
-    // $('.lead-into-page').addClass('dn');
+    languageTypeShow();
+    $('.lead-into-page').addClass('dn');
     var stage = document.querySelector('#stage');
     $('#stageCover').removeClass('dn');
+    var audioEle = document.getElementById('moduleSound');
+    audioEle.play();
+    audioEle.pause();
 
     stage.classList.remove('dn');
     var container;
@@ -279,9 +288,23 @@ function loadModule() {
 }
 
 function playModuleSound() {
+    var soundSectinEle = $('.module-sound'),
+        volumeNum = 1;
+    var audioEle = document.getElementById('moduleSound');
     setTimeout(function () {
         $('.module-sound-title').addClass('dn');
-    }, 3000)
+        audioEle.play();
+        audioEle.volume = volumeNum;
+        soundSectinEle.removeClass('dn');
+    }, 3000);
+    $('.sound-voice-btn').on('click', function () {
+        volumeNum = volumeNum == 1 ? 0 : 1;
+        audioEle.volume = volumeNum;
+    });
+    $('.skip-sound-btn').on('click', function () {
+        audioEle.pause();
+        soundSectinEle.addClass('dn');
+    });
 }
 
 function moduleBtnActive() {
