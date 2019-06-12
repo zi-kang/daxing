@@ -97,7 +97,6 @@ gulp.task('publishCss',function(){
 });
 gulp.task('publishLibs',function(){
     gulp.src(['dev/libs/*.js'])
-        .pipe( babel() )
         .pipe( uglify() )
         .pipe( gulp.dest('release/libs/'));
 });

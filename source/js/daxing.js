@@ -185,6 +185,7 @@ function languageTypeShow() {
     $('.people-names1').text(lang == 'cn' ? '大兴机场' : 'Daxing Airport');
     $('.show-current-plan-note').text(lang == 'cn' ? '和朋友分享!' : 'SHARE WITH YOUR FRIENDS !');
     $('#showCurrentPlanMain').addClass(lang == 'cn' ? 'plan-bg-cn' : 'plan-bg');
+    $('.data-store-4-main').text(lang == 'cn' ? '获取更多信息请在电脑端浏览' : 'For more information please visit on PC');
     var currentPlanCapitalList = planCapitalList[lang];
     var selectCityEle = $('#selectCityEle');
     for(var i = 0, j = currentPlanCapitalList.length; i < j; i++) {
@@ -445,9 +446,9 @@ function getVideoTimeCommon(insetTime) {
 
 var introWordList = {
   cn: [
-      '',
-      '当两个机场的准时起飞性能达到85%时',
-      '当两个机场的准时起飞性能达到85%时，最大空中交通量。'
+      '北京大兴国际机场',
+      '当两个机场准点率达到85%',
+      '两个机场准点率达到85%时的最大空中交通量。'
   ],
   en: [
       'Intro1 : Beijing Daxing International Airport text text text text',
@@ -778,7 +779,7 @@ function getCurrentPlan() {
     $('.user-plan-time').text(getCurrentTime());
     $('.download-plan-btn').on('click', function () {
         html2canvas(document.getElementById('showCurrentPlanMain')).then(function(canvas) {
-            document.body.appendChild(canvas);
+            // document.body.appendChild(canvas);
             var img = canvas.toDataURL();
             saveFile(img, 'daxing.png');
         });
